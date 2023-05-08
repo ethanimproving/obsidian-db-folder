@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "rollup --config rollup.config.mjs -w",
 		"build": "rollup --config rollup.config.mjs",
+		"minify": "rollup -c rollup.config.mjs && terser main.js -o main.min.js",
 		"test": "jest --colors --coverage test",
 		"sonar": "npx eslint --ignore-path .gitignore src/**/*.ts",
 		"pretest": "eslint --ignore-path .gitignore src/**/*.ts"

@@ -20,17 +20,17 @@ function CheckboxCell(props: CellComponentProps) {
       ParseService.parseRowToCell(
         state.rows[row.index],
         tableColumn,
-        InputType.CHECKBOX,
+        InputType.NUMBER,
         configInfo.getLocalSettings()
-      ) as boolean
+      ) as number
   );
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.checked;
-    editCheckbox(newValue);
+    editCheckbox(newValue ? 1 : 0);
   };
 
-  const editCheckbox = async (newValue: boolean) => {
+  const editCheckbox = async (newValue: number) => {
     const newCell = ParseService.parseRowToLiteral(
       checkboxRow,
       tableColumn,
@@ -55,13 +55,13 @@ function CheckboxCell(props: CellComponentProps) {
       onKeyDown={(e) => {
         if (e.key === "Enter") {
           e.preventDefault();
-          editCheckbox(!checkboxCell);
+          editCheckbox(checkboxCell ? 1 : 0);
         }
       }}
     >
       <input
         type="checkbox"
-        checked={checkboxCell}
+        checked={!!checkboxCell}
         key={`checkbox-input-${row.index}`}
         onChange={handleChange}
       />
